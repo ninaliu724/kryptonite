@@ -1,13 +1,6 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, Alert, Animated } from "react-native";
-import {
-  Input,
-  Button,
-  Logo,
-  Heading,
-  BackgroundWrapper,
-  AlertStatus
-} from "../components/uiComponents";
+import { Input, Button, Logo, Heading, BackgroundWrapper, AlertStatus, TextFont } from "../components/uiComponents";
 import { getPlatformValue } from "../components/utils";
 import Icon from "react-native-vector-icons/FontAwesome";
 export default class SignInScreen extends React.Component {
@@ -38,6 +31,8 @@ export default class SignInScreen extends React.Component {
 
   handlePressSignUp() {
     //this.props.navigation.navigate("SignUp");
+    Alert.alert("Button pressed", "User sign up");
+    this.props.navigation.navigate("SignUp");
   }
 
   componentDidMount() {
@@ -72,59 +67,76 @@ export default class SignInScreen extends React.Component {
           </Heading>
           <View style={loginStyle.formContainer}>
             <Animated.View
-              style={{
-                position: "relative",
-                left: this.state.animation.usernamePostionLeft
-              }}
-            >
+      style={{
+        position: "relative",
+        left: this.state.animation.usernamePostionLeft
+      }}
+      >
               <Input
-                label="Username"
-                icon={<Icon name="user" />}
-                value={this.state.username}
-                onChange={this.handleChangeInput.bind(this, "username")}
-              />
+      label="Username"
+      icon={<Icon name="user" />}
+      value={this.state.username}
+      onChange={this.handleChangeInput.bind(this, "username")}
+      />
             </Animated.View>
             <Animated.View
-              style={{
-                position: "relative",
-                left: this.state.animation.passwordPositionLeft
-              }}
-            >
+      style={{
+        position: "relative",
+        left: this.state.animation.passwordPositionLeft
+      }}
+      >
               <Input
-                label="Password"
-                icon={<Icon name="key" />}
-                value={this.state.password}
-                marginTop={23}
-                onChange={this.handleChangeInput.bind(this, "password")}
-                secureTextEntry
-              />
+      label="Password"
+      icon={<Icon name="key" />}
+      value={this.state.password}
+      marginTop={23}
+      onChange={this.handleChangeInput.bind(this, "password")}
+      secureTextEntry
+      />
             </Animated.View>
             <Animated.View
-              style={{
-                position: "relative",
-                top: this.state.animation.loginPositionTop
-              }}
-            >
+      style={{
+        position: "relative",
+        top: this.state.animation.loginPositionTop
+      }}
+      >
               <Button marginTop={60} onPress={this.handePressSignIn.bind(this)}>
                 Sign in
               </Button>
             </Animated.View>
+            <Animated.View
+      style={{
+        alignItems: "center",
+        marginTop: 20
+      }}
+      >
+              <Text
+      style={{
+        color: "#ffffff",
+        fontSize: 16,
+        textDecorationLine: "underline"
+      }}
+      onPress={this.handlePressSignUp.bind(this)}
+      >
+                {"Don't have account? Sign up here!"}
+              </Text>
+            </Animated.View>
           </View>
         </View>
         <Animated.View
-          style={{
-            position: "relative",
-            top: this.state.animation.statusPositionTop
-          }}
-        >
+      style={{
+        position: "relative",
+        top: this.state.animation.statusPositionTop
+      }}
+      >
           <AlertStatus
-            textHelper="Don't have account"
-            textAction="Sign up"
-            onPressAction={this.handlePressSignUp.bind(this)}
-          />
+      textHelper="Don't have account"
+      textAction="Sign up"
+      onPressAction={this.handlePressSignUp.bind(this)}
+      />
         </Animated.View>
       </BackgroundWrapper>
-    );
+      );
   }
 
   _signInAsync = async () => {
